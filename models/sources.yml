@@ -10,3 +10,16 @@ sources:
             description: One record per customer.
           - name: orders
             description: One record per order. Includes cancelled and deleted orders.
+
+    - name: stripe
+      description: This is the raw data for stripe payment transaction.
+      database: DB_LEOL_DBT_RAW
+      schema: stripe
+      tables:
+        - name: payment
+          loaded_at_field: _batched_at
+          freshness: 
+            error_after: {count: 300, period: day}
+            warn_after: {count: 10, period: day}
+        
+
